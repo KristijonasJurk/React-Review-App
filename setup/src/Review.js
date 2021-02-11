@@ -3,8 +3,8 @@ import people from './data';
 import { FaChevronLeft, FaChevronRight, FaQuoteRight } from 'react-icons/fa';
 
 const Review = () => {
-  const [index, setindex] = useState(0);
-  const {id, name, job, image, text} = people[index]
+  const [index, setIndex] = useState(0);
+  const {name, job, image, text} = people[index]
 
   const checkIndex = (number) => {
     if(number > people.length-1) {
@@ -17,29 +17,28 @@ const Review = () => {
   }
 
   const prevPerson = () => {
-    setindex((index) => {
+    setIndex((index) => {
       let newIndex = index - 1;
       return checkIndex(newIndex)
-    })
-  }
+    });
+  };
   const nextPerson = () => {
-    setindex((index) => {
+    setIndex((index) => {
       let newIndex = index + 1;
       return checkIndex(newIndex)
-    })
-  }
-  const surprisePerson = () => {
-      let random = Math.floor(Math.random()*people.length);
-      if(random === index) {
-        random = index += 1;
-      }
-      setIndex(checkIndex(random));
+    });
+  };
+  const randomPerson = () => {
+    let randomNumber = Math.floor(Math.random() * people.length);
+    if (randomNumber === index) {
+      randomNumber = index + 1;
     }
-  }
+    setIndex(checkIndex(randomNumber));
+  };
 
 
   return (
-  <article key={id} className='review'>
+  <article className='review'>
     <div className="img-container">
       <img src={image} alt={name} className='person-img'/>
       <span className="quote-icon">
@@ -63,11 +62,11 @@ const Review = () => {
           <FaChevronRight/>
         </button>
       </div>
-        <button className='random-btn' onClick={surprisePerson}>
-          surprise me
-        </button>
+      <button className='random-btn' onClick={randomPerson}>
+        surprise me
+      </button>
     </article>
-  )
-}
+  );
+};
 
 export default Review;
